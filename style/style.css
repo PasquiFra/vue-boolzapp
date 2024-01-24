@@ -28,7 +28,7 @@
 
     margin-top: 5vh;
 
-    height: 90vh;
+    height: 90%;
     width: 100%;
 }
 
@@ -90,6 +90,8 @@ nav {
     background-color: white;
 }
 
+/* SEZIONE MIO PROFILO */
+
 #profile {
     height: var(--profile-height);
     background-color: var(--bg-lgrey);
@@ -100,19 +102,7 @@ nav {
     align-self: center;
 }
 
-#filter {
-    background-color: #F9F9F9;
-}
-
-#filter span,
-#filter input {
-    background-color: white;
-    border: 0;
-}
-
-#filter .fa-magnifying-glass{
-    font-size: 1rem;
-}
+/* SEZIONE ATTIVA ALERT NOTIFICATIONS */
 
 #notifications {
     background-color: var(--bg-lazure);
@@ -142,6 +132,32 @@ nav {
     color: var(--text-gray);
 }
 
+/* SEZIONE FILTRA CHAT */
+
+#filter {
+    height: 50px;
+    background-color: #F9F9F9;
+}
+
+#filter span,
+#filter input {
+    background-color: white;
+    border: 0;
+}
+
+#filter .fa-magnifying-glass{
+    font-size: 1rem;
+}
+
+/* SEZIONE ULTIME CHAT */
+
+#contacts {
+   max-height: calc(90vh - (2 * var(--profile-height)) - 50px);
+
+   overflow: auto;
+}
+
+
 .contact {
    border-bottom: 1px solid var(--bg-lgrey);
 }
@@ -168,10 +184,63 @@ main {
     flex-shrink: 0;
 }
 
+/* SEZIONE CHAT ATTIVA */
+
 #current-chat-info {
     background-color: var(--bg-lgrey);
     flex-basis: var(--profile-height);
 }
+
+
+/* SEZIONE LIVE MESSAGES */
+
+#chat-messages {
+    flex-basis: calc(90vh - (2 * var(--profile-height)));
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: column;
+    
+    padding: 2.5rem 4rem;
+
+    overflow: auto;
+}
+
+.message {
+    position: relative;
+
+    padding: 1rem;
+    padding-bottom: 1.2rem;
+    margin: 1rem 0;
+
+    max-width: 70%;
+}
+
+.sent {
+    align-self: end;
+    
+    background-color: #D5F9BA;
+    border-radius: 15px 0px 15px 15px;
+}
+
+.received {
+    align-self: start;
+
+    background-color: white;
+    border-radius: 15px 15px 15px 0px;
+}
+
+.message div {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+
+    color: var(--text-gray);
+    font-size: 0.7rem;
+    text-align: end;
+}
+
+/* SEZIONE INPUT MESSAGGI */
 
 #input-area {
     background-color: var(--bg-lgrey);
@@ -187,10 +256,4 @@ main {
 #input-area i {
     width: 10%;
     text-align: center;
-}
-
-
-#chat-messages {
-    flex-basis: calc(100% - (2 * var(--profile-height)));
-
 }
