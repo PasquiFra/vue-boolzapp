@@ -1,0 +1,48 @@
+/* ------------ CSS PROPERTIES ------------*/
+
+:root {
+    --space-sm: **px/rem;
+    --space-md: **px/rem;
+    --space-lg: **px/rem;
+}
+
+/* ------------ CSS RESET ------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* UTILS */
+
+.flex-center {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+/* GENERAL */
+
+body {
+    background: linear-gradient(#009688 20%, #D8DBD6 20%), #D8DBD6;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.wrapper {
+    background-color: white;
+
+    margin-top: 5vh;
+
+    height: 90vh;
+    width: 100%;
+}
+
+nav {
+    background-color: white;
+}
+
+main {
+    background-image: url(../img/mine.jpg);
+}
