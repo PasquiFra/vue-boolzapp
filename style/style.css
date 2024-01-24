@@ -1,11 +1,17 @@
 /* ------------ CSS PROPERTIES ------------*/
 
 :root {
+    --bg-darkerGrey: #B1B1B1;
     --bg-lgrey: #EAEAEA;
     --bg-lazure: #8EDAFC;
     --bg-lagoon: #009688;
     --profile-height: 80px;
     --space-med: 1rem;
+    
+    --text-bigger: 1.2rem;
+    --text-smaller: 0.8rem;
+    --text-gray: rgba(66, 66, 66, 0.555);
+
 }
 
 /* ------------ CSS RESET ------------*/
@@ -17,22 +23,6 @@
 
 /* UTILS */
 
-.flex-center {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* GENERAL */
-
-body {
-    background: linear-gradient(#009688 20%, #D8DBD6 20%), #D8DBD6;
-    
-    height: 100vh;
-    width: 100vw;
-}
-
 .wrapper {
     background-color: white;
 
@@ -40,6 +30,28 @@ body {
 
     height: 90vh;
     width: 100%;
+}
+
+.flex-center {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.last-online {
+    font-size: var(--text-smaller);
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+/*! GENERAL */
+
+body {
+    background: linear-gradient(#009688 20%, #D8DBD6 20%), #D8DBD6;
+    
+    height: 100vh;
+    width: 100vw;
 }
 
 figure img {
@@ -55,13 +67,13 @@ figure {
 }
 
 .user-name {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 i {
     font-size: 1.4rem;
-    color: #B1B1B1;
+    color: var(--bg-darkerGrey);
     padding: 0 10px;
     cursor: pointer;
 }
@@ -71,9 +83,6 @@ i:hover {
     color: var(--bg-lagoon);
 }
 
-.last-online {
-    font-size: 0.8rem;
-}
 
 /* ! NAV-BAR section */
 
@@ -82,9 +91,8 @@ nav {
 }
 
 #profile {
-    background-color: var(--bg-lgrey);
-
     height: var(--profile-height);
+    background-color: var(--bg-lgrey);
 }
 
 #profile .user-name {
@@ -93,18 +101,53 @@ nav {
 }
 
 #filter {
-    background-color: var(--bg-lgrey);
+    background-color: #F9F9F9;
+}
 
+#filter span,
+#filter input {
+    background-color: white;
+    border: 0;
+}
+
+#filter .fa-magnifying-glass{
+    font-size: 1rem;
 }
 
 #notifications {
     background-color: var(--bg-lazure);
     
-    height: 100px;
+    height: var(--profile-height);
+}
+
+.bell {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: #F2FBFF;
+}
+
+.fa-bell-slash {
+    color: var(--bg-lazure);
+}
+
+#notifications h5 { 
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+#notifications a {
+    font-size: var(--text-smaller);
+    font-weight: 600;
+    color: var(--text-gray);
 }
 
 .contact {
-    border: 1px solid black;
+   border-bottom: 1px solid var(--bg-lgrey);
+}
+
+.contact:hover {
+   background-color: #E9EBEB;
 }
 
 .contact figure {
@@ -114,10 +157,8 @@ nav {
 }
 
 
-
-
-
 /* ! MAIN SECTION  */
+
 main {
     border-left: 1px solid rgba(169, 169, 169, 0.37);
     background-image: url(../img/mine.jpg);
