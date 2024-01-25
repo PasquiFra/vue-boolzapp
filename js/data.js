@@ -6,7 +6,7 @@ const data = {
     contacts: [
       {
         id: 1,
-        name: 'Michele',
+        name: 'Jesse',
         avatar: '_1',
         messages: [
           {

@@ -1,7 +1,5 @@
 console.log("Vue OK", Vue);
 
-const messages = contacts.messages;
-let lowestId = Infinity;
 
 const {createApp} = Vue;
 const app = createApp ({
@@ -9,23 +7,38 @@ const app = createApp ({
     data () {
         return {
             ...data,
-            nowActiveID: lowestId,
+            nowActiveID: null,
+            nowActiveContact: null,
         }
     },
     computed: {
-        
-    },
-    methods: {
-        getLowestID () {
-            for (contact in contacts) {
-                if (contact.id < lowestId) {
-                    lowestId = contact.id;
-                    console.log(lowestId);
-                    return lowestId
-                }
-            }
+        messageStatus(){
+            const message = nowActiveContact.message
+
+            message.status === 'sent' ? "sent" : "received"
         }
     },
+    methods: {
+        changeActiveID(id) {
+            for (let i=0; i < this.contacts.length; i++){
+                if (this.contacts[i].id === id) {
+                    this.nowActiveID = id,
+                    this.nowActiveContact = this.contacts[i]
+                }
+            }
+        },
+
+    },
+    mounted(){
+        let lowestId = Infinity;
+        for (contact of this.contacts) {
+            if (contact.id < lowestId) {
+                lowestId = contact.id;
+            }
+        }
+        this.nowActiveID = lowestId 
+    }
+
 })
 
 app.mount("#root");
