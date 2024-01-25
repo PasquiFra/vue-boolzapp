@@ -10,6 +10,7 @@ const app = createApp ({
             nowActiveID: null,
             nowActiveContact: null,
             newMessage: "",
+            active: true,
         }
     },
     computed: {
@@ -62,6 +63,9 @@ const app = createApp ({
         },
         onSubmit(e) { 
             e.preventDefault();
+        },
+        dropdown(){
+
         }
     },
     mounted(){

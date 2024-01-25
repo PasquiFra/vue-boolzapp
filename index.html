@@ -109,9 +109,16 @@
                     </header>
 
                     <div id="chat-messages" class="d-flex">
-                        <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" :key="message.id" :class="`message ${message.status}` , message.status"> 
-                            {{message.text}}
-                            <span class="timestamp">{{message.date}}</span>
+                        <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" 
+                        :key="message.id" :class="`message ${message.status}`"
+                        data-bs-toggle="dropdown" aria-expanded="false"
+                        class="dropdown btn dropdown-toggle"> 
+                                <span class="pe-3">{{message.text}}</span>
+                                <span class="timestamp">{{message.date}}</span>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Message info</a></li>
+                                <li><a class="dropdown-item" href="#">Delete message</a></li>
+                            </ul>
                         </div>
                     </div>
 

@@ -219,7 +219,6 @@ main {
 
 .sent {
     align-self: end;
-    text-align: end;
     
     background-color: #D5F9BA;
     border-radius: 15px 0px 15px 15px;
@@ -227,7 +226,6 @@ main {
 
 .received {
     align-self: start;
-    text-align: start;
 
     background-color: white;
     border-radius: 15px 15px 15px 0px;
@@ -242,6 +240,28 @@ main {
     font-size: 0.7rem;
     text-align: end;
 }
+
+.dropdown-toggle::after {
+    content: none;
+}
+.dropdown-toggle.show::after {
+    content: "";
+}
+.dropdown-toggle.show.sent {
+    background-color: #D5F9BA;
+    border: none;
+}
+.dropdown-toggle.show.received {
+    background-color: white;
+    border: none;
+}
+.dropdown-toggle.sent:hover {
+    background-color: #D5F9BA;
+}
+.dropdown-toggle.received:hover {
+    background-color:white;
+}
+
 
 /* SEZIONE INPUT MESSAGGI */
 
