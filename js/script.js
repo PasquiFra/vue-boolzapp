@@ -9,14 +9,11 @@ const app = createApp ({
             ...data,
             nowActiveID: null,
             nowActiveContact: null,
+            newMessage: "",
         }
     },
     computed: {
-        messageStatus(){
-            const message = nowActiveContact.message
-
-            message.status === 'sent' ? "sent" : "received"
-        }
+        
     },
     methods: {
         changeActiveID(id) {
@@ -27,7 +24,45 @@ const app = createApp ({
                 }
             }
         },
+        newDate (){
+            const currentDate = new Date();
+            console.log(currentDate)
 
+            return currentDate.toLocaleString();
+        },
+        addMessage (){
+            if (!this.newMessage) return
+
+            const updateMessages = this.nowActiveContact.messages
+            
+            const newMessage = {
+                id: updateMessages.length,
+                date: this.newDate(),
+                text: this.newMessage,
+                status: 'sent'
+            }
+            updateMessages.push(newMessage)
+            console.log(newMessage, updateMessages)
+            this.newMessage = "";
+            this.reply()
+        },
+        reply() {
+            setTimeout(() => {
+                const updateMessages = this.nowActiveContact.messages
+            
+                const newMessage = {
+                    id: updateMessages.length,
+                    date: this.newDate(),
+                    text: "ok",
+                    status: 'received'
+                }
+                updateMessages.push(newMessage)
+                console.log(newMessage, updateMessages)
+            },1000)
+        },
+        onSubmit(e) { 
+            e.preventDefault();
+        }
     },
     mounted(){
         let lowestId = Infinity;

@@ -111,12 +111,13 @@
                     <div id="chat-messages" class="d-flex">
                         <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" :key="message.id" :class="`message ${message.status}` , message.status"> 
                             {{message.text}}
+                            <span class="timestamp">{{message.date}}</span>
                         </div>
                     </div>
 
-                    <form id="input-area" class="flex-center">
+                    <form id="input-area" class="flex-center" @submit="onSubmit">
                         <i class="fa-regular fa-face-smile align-self-center"></i>
-                        <input type="text" class="rounded ps-3" placeholder="Scrivi un messaggio">
+                        <input type="text" class="rounded ps-3" placeholder="Scrivi un messaggio" @keyup.enter="addMessage" v-model="newMessage">
                         <i class="fa-solid fa-microphone align-self-center"></i>
                     </form>
                 </main>

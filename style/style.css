@@ -213,11 +213,13 @@ main {
     padding-bottom: 1.2rem;
     margin: 1rem 0;
 
+    min-width: 120px;
     max-width: 70%;
 }
 
 .sent {
     align-self: end;
+    text-align: end;
     
     background-color: #D5F9BA;
     border-radius: 15px 0px 15px 15px;
@@ -225,12 +227,13 @@ main {
 
 .received {
     align-self: start;
+    text-align: start;
 
     background-color: white;
     border-radius: 15px 15px 15px 0px;
 }
 
-.message div {
+.message .timestamp {
     position: absolute;
     right: 5px;
     bottom: 5px;
