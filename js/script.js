@@ -8,13 +8,30 @@ const app = createApp ({
         return {
             ...data,
             nowActiveID: null,
-            nowActiveContact: null,
+            nowActiveContact: false,
             newMessage: "",
             active: true,
+            textSearch: "",
         }
     },
     computed: {
-        
+        defaultClass (){ 
+            return {
+                "d-none": this.nowActiveContact === false
+            }
+        },
+        nowActive(){
+            return {
+                "d-none": this.nowActiveContact !== false
+            }
+        },
+        contactsFilter(){
+            const loweredTextSearch = this.textSearch.toLowerCase()
+
+            return this.contacts.filter(contact => 
+                contact.name.toLowerCase().includes(loweredTextSearch)
+            );
+        }
     },
     methods: {
         changeActiveID(id) {
@@ -43,7 +60,6 @@ const app = createApp ({
                 status: 'sent'
             }
             updateMessages.push(newMessage)
-            console.log(newMessage, updateMessages)
             this.newMessage = "";
             this.reply()
         },
@@ -58,13 +74,15 @@ const app = createApp ({
                     status: 'received'
                 }
                 updateMessages.push(newMessage)
-                console.log(newMessage, updateMessages)
             },1000)
         },
         onSubmit(e) { 
             e.preventDefault();
         },
-        dropdown(){
+        getAvatarUrl (avatar) {
+            return `img/avatar${avatar}.jpg`
+        },
+        filtering(){
 
         }
     },

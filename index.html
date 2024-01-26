@@ -40,7 +40,7 @@
                     <header id="profile" class="d-flex justify-content-between align-items-center">
                         <div id="user-info" class="flex-center">
                             <figure>
-                                <img :src="`./img/avatar${user.avatar}.png`" :alt="user.name">
+                                <img :src="getAvatarUrl(user.avatar)" :alt="user.name">
                             </figure>
                             <span class="user-name m-1">
                                 {{user.name}}
@@ -65,17 +65,18 @@
                     </div>
 
                     <div id="filter" class="p-2">
-                        <div class="input-group">
+                        <div class="input-group position-relative">
                             <span class="input-group-text rounded-0"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" class="form-control rounded-0" placeholder="Cerca o inizia una nuova chat">
+                            <input type="text" class="form-control rounded-0" placeholder="Cerca o inizia una nuova chat"
+                            v-model.trim="textSearch">
                         </div>
                     </div>
 
                     <section id="contacts" class="row-cols-1">
                         <div id="contacts-wrap">
-                            <div v-for="contact of contacts" :key="contact.id" @click="changeActiveID(contact.id)" class="contact col d-flex p-2">
+                            <div v-for="contact of contactsFilter" :key="contact.id" @click="changeActiveID(contact.id)" class="contact col d-flex p-2">
                                 <figure>
-                                    <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
+                                    <img :src="getAvatarUrl(contact.avatar)" :alt="contact.name">
                                 </figure>
                                 <div class="user-name ms-3">
                                     {{contact.name}}
@@ -86,10 +87,15 @@
                 </nav>
 
                 <main class="col-8 p-0 d-flex">
-                    <header id="current-chat-info"  class="d-flex justify-content-between align-items-center">
-                        <div v-if="nowActiveID" class="flex-center">
+                    <div :class="nowActive" class="flex-center default-settings position-relative">
+                        <h3>Boolzapp</h3>
+                        <p>Al momento non hai ancora selezionato una chat, scorri la lista dei contatti ed inizia a messaggiare!</p>
+                        <p class="position-absolute bottom-0 start-50 translate-middle"><i class="fa-solid fa-lock"></i> Con crittografia abbastanza sicura</p>
+                    </div>
+                    <header id="current-chat-info"  class="d-flex justify-content-between align-items-center" :class="defaultClass">
+                        <div v-if="nowActiveContact" class="flex-center">
                             <figure>
-                                <img :src="`./img/avatar_${nowActiveContact.id}.jpg`">
+                                <img :src="getAvatarUrl(nowActiveContact.avatar)">
                             </figure>
                             <div class="flex-center">
                                 <span class="user-name w-100">
@@ -108,7 +114,7 @@
                         </div>
                     </header>
 
-                    <div id="chat-messages" class="d-flex">
+                    <div id="chat-messages" class="d-flex" :class="defaultClass">
                         <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" 
                         :key="message.id" :class="`message ${message.status}`"
                         data-bs-toggle="dropdown" aria-expanded="false"
@@ -122,7 +128,7 @@
                         </div>
                     </div>
 
-                    <form id="input-area" class="flex-center" @submit="onSubmit">
+                    <form id="input-area" class="flex-center" @submit="onSubmit" :class="defaultClass">
                         <i class="fa-regular fa-face-smile align-self-center"></i>
                         <input type="text" class="rounded ps-3" placeholder="Scrivi un messaggio" @keyup.enter="addMessage" v-model="newMessage">
                         <i class="fa-solid fa-microphone align-self-center"></i>

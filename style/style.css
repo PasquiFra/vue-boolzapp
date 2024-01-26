@@ -145,9 +145,27 @@ nav {
     border: 0;
 }
 
+#filter input {
+    padding-left: 40px;
+}
+
+#filter input:focus {
+    padding-left: 10px;
+}
+
 #filter .fa-magnifying-glass{
     font-size: 1rem;
 }
+
+.input-group-text {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+}
+
 
 /* SEZIONE ULTIME CHAT */
 
@@ -191,6 +209,23 @@ main {
     flex-basis: var(--profile-height);
 }
 
+.default-settings {
+    align-self: center;
+    text-align: center;
+    height: 100%;
+}
+.default-settings p {
+    width: 70%;
+    color: rgb(83, 83, 83);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.default-settings h3 {
+    width: 100%;
+    color: dodgerblue;
+    font-weight: 700;
+    font-size: 2rem;
+}
 
 /* SEZIONE LIVE MESSAGES */
 

@@ -12,19 +12,19 @@ const data = {
           {
             id: 1,
             date: '10/01/2020 15:30:55',
-            text: 'Hai portato a spasso il cane?',
+            text: 'Jesseeee!',
             status: 'sent'
           },
           {
             id: 2,
             date: '10/01/2020 15:50:00',
-            text: 'Ricordati di stendere i panni',
+            text: "E' ora di cucinare... Andiamo!",
             status: 'sent'
           },
           {
             id: 3,
             date: '10/01/2020 16:15:22',
-            text: 'Tutto fatto!',
+            text: 'Si... Capo!',
             status: 'received'
           }
         ],
