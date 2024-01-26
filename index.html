@@ -78,8 +78,16 @@
                                 <figure>
                                     <img :src="getAvatarUrl(contact.avatar)" :alt="contact.name">
                                 </figure>
-                                <div class="user-name ms-3">
-                                    {{contact.name}}
+                                <div class="d-flex flex-grow-1 flex-wrap">
+                                    <div class="user-name ms-3">
+                                        {{contact.name}}
+                                    </div>
+                                    <span class="last-online justify-self-end flex-grow-1 text-end align-self-middle pt-1">
+                                        {{lastMessage(contact.messages)}}
+                                    </span>
+                                    <span class="last-online w-100 ms-3">
+                                        {{lastMessageText(contact.messages)}}
+                                    </span>
                                 </div>
                             </div>
                         </div>                     
@@ -102,7 +110,7 @@
                                    {{nowActiveContact.name}}
                                 </span>
                                 <span class="last-online w-100">
-                                    Ultimo accesso oggi alle
+                                    Ultimo accesso {{lastMessage(nowActiveContact.messages)}}
                                 </span>
                             </div>
                         </div>
@@ -115,15 +123,18 @@
                     </header>
 
                     <div id="chat-messages" class="d-flex" :class="defaultClass">
-                        <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" 
-                        :key="message.id" :class="`message ${message.status}`"
+                        <div 
+                        v-if="nowActiveID" 
+                        v-for="message in nowActiveContact.messages" 
+                        :key="message.id" 
+                        :class="`message ${message.status}`"
                         data-bs-toggle="dropdown" aria-expanded="false"
                         class="dropdown btn dropdown-toggle"> 
                                 <span class="pe-3 text-wrap word-wrap overflow-wrap text-break">{{message.text}}</span>
                                 <span class="timestamp">{{getTime(message.date)}}</span>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Message info</a></li>
-                                <li><a class="dropdown-item" href="#">Delete message</a></li>
+                                <li><a class="dropdown-item" href="#" @click="deleteMessage(message.id)">Delete message</a></li>
                             </ul>
                         </div>
                     </div>
