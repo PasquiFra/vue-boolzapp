@@ -119,8 +119,8 @@
                         :key="message.id" :class="`message ${message.status}`"
                         data-bs-toggle="dropdown" aria-expanded="false"
                         class="dropdown btn dropdown-toggle"> 
-                                <span class="pe-3">{{message.text}}</span>
-                                <span class="timestamp">{{message.date}}</span>
+                                <span class="pe-3 text-wrap word-wrap overflow-wrap text-break">{{message.text}}</span>
+                                <span class="timestamp">{{getTime(message.date)}}</span>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Message info</a></li>
                                 <li><a class="dropdown-item" href="#">Delete message</a></li>

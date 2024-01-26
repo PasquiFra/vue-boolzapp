@@ -48,6 +48,13 @@ const app = createApp ({
 
             return currentDate.toLocaleString();
         },
+        getTime (date){
+            const newDate = new Date(date)
+            const hours = newDate.getHours()
+            const minutes = newDate.getMinutes()
+            console.log(newDate)
+            return `${hours}:${minutes}`
+        },
         addMessage (){
             if (!this.newMessage) return
 

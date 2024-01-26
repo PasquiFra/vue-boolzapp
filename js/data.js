@@ -18,7 +18,7 @@ const data = {
           {
             id: 2,
             date: '10/01/2020 15:50:00',
-            text: "E' ora di cucinare... Andiamo!",
+            text: "E' ora di cucinare... Ci vediamo al camper!",
             status: 'sent'
           },
           {
