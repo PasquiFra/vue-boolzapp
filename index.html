@@ -123,15 +123,15 @@
                     </header>
 
                     <div id="chat-messages" class="d-flex" :class="defaultClass">
-                        <div 
-                        v-if="nowActiveID" 
-                        v-for="message in nowActiveContact.messages" 
+                        
+                        <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" 
                         :key="message.id" 
                         :class="`message ${message.status}`"
-                        data-bs-toggle="dropdown" aria-expanded="false"
-                        class="dropdown btn dropdown-toggle"> 
+                        class="dropdown btn dropdown-toggle" 
+                        data-bs-toggle="dropdown" aria-expanded="false"> 
                                 <span class="pe-3 text-wrap word-wrap overflow-wrap text-break">{{message.text}}</span>
                                 <span class="timestamp">{{getTime(message.date)}}</span>
+                            
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Message info</a></li>
                                 <li><a class="dropdown-item" href="#" @click="deleteMessage(message.id)">Delete message</a></li>

@@ -103,6 +103,12 @@ const app = createApp ({
                 }
             }
             return `${splittedWords.join("")}...`
+        },
+        deleteMessage(messageId){
+            console.log(messageId)
+            const messages = this.nowActiveContact.messages
+            newArray = messages.filter(message => message.id !== messageId);
+            console.log(newArray)
         }
     },
     mounted(){
