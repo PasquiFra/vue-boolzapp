@@ -12,31 +12,34 @@
 
     <!--! Collegamento font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"/>
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--! Collegamento fogli di stile -->
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Style.css -->
     <link rel="stylesheet" href="./style/style.css">
 
     <!-- Collegamento cdn VueJS -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    
+
     <!--! Javascript -->
-    <script src="./js/data.js" ></script>
+    <script src="./js/data.js"></script>
     <script src="./js/script.js" defer></script>
 </head>
 
 <body>
     <div id="root">
-       <div class="container flex-center"> 
+        <div class="container flex-center">
             <section class="wrapper row">
-                
+
+                <!-- NAVBAR LATERALE-->
                 <nav class="col-4 p-0">
+
+                    <!-- Profilo contatto personale -->
                     <header id="profile" class="d-flex justify-content-between align-items-center">
                         <div id="user-info" class="flex-center">
                             <figure>
@@ -54,6 +57,7 @@
                         </div>
                     </header>
 
+                    <!-- banner attiva notifiche -->
                     <div id="notifications" class="d-flex align-items-center px-3">
                         <div class="bell flex-center">
                             <i class="fa-solid fa-bell-slash"></i>
@@ -64,17 +68,20 @@
                         </div>
                     </div>
 
+                    <!-- Filtro contatti -->
                     <div id="filter" class="p-2">
                         <div class="input-group position-relative">
                             <span class="input-group-text rounded-0"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" class="form-control rounded-0" placeholder="Cerca o inizia una nuova chat"
-                            v-model.trim="textSearch">
+                            <input type="text" class="form-control rounded-0"
+                                placeholder="Cerca o inizia una nuova chat" v-model.trim="textSearch">
                         </div>
                     </div>
 
+                    <!-- Sezione contatti -->
                     <section id="contacts" class="row-cols-1">
                         <div id="contacts-wrap">
-                            <div v-for="contact of contactsFilter" :key="contact.id" @click="changeActiveID(contact.id)" class="contact col d-flex p-2">
+                            <div v-for="contact of contactsFilter" :key="contact.id" @click="changeActiveID(contact.id)"
+                                class="contact col d-flex p-2">
                                 <figure>
                                     <img :src="getAvatarUrl(contact.avatar)" :alt="contact.name">
                                 </figure>
@@ -82,7 +89,8 @@
                                     <div class="user-name ms-3">
                                         {{contact.name}}
                                     </div>
-                                    <span class="last-online justify-self-end flex-grow-1 text-end align-self-middle pt-1">
+                                    <span
+                                        class="last-online justify-self-end flex-grow-1 text-end align-self-middle pt-1">
                                         {{lastMessage(contact.messages)}}
                                     </span>
                                     <span class="last-online w-100 ms-3">
@@ -90,24 +98,32 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>                     
+                        </div>
                     </section>
                 </nav>
 
+                <!-- Sezione show conversazioni  -->
                 <main class="col-8 p-0 d-flex">
+
+                    <!-- Se non ho conversazioni attive mostro un messaggio di default -->
                     <div :class="nowActive" class="flex-center default-settings position-relative">
                         <h3>Boolzapp</h3>
-                        <p>Al momento non hai ancora selezionato una chat, scorri la lista dei contatti ed inizia a messaggiare!</p>
-                        <p class="position-absolute bottom-0 start-50 translate-middle"><i class="fa-solid fa-lock"></i> Con crittografia abbastanza sicura</p>
+                        <p>Al momento non hai ancora selezionato una chat, scorri la lista dei contatti ed inizia a
+                            messaggiare!</p>
+                        <p class="position-absolute bottom-0 start-50 translate-middle"><i class="fa-solid fa-lock"></i>
+                            Con crittografia abbastanza sicura</p>
                     </div>
-                    <header id="current-chat-info"  class="d-flex justify-content-between align-items-center" :class="defaultClass">
+
+                    <!-- Se ho selezionato una chat mostro tutti le info del contatto -->
+                    <header id="current-chat-info" class="d-flex justify-content-between align-items-center"
+                        :class="defaultClass">
                         <div v-if="nowActiveContact" class="flex-center">
                             <figure>
                                 <img :src="getAvatarUrl(nowActiveContact.avatar)">
                             </figure>
                             <div class="flex-center">
                                 <span class="user-name w-100">
-                                   {{nowActiveContact.name}}
+                                    {{nowActiveContact.name}}
                                 </span>
                                 <span class="last-online w-100">
                                     Ultimo accesso {{lastMessage(nowActiveContact.messages)}}
@@ -122,26 +138,29 @@
                         </div>
                     </header>
 
+                    <!-- ... e i messaggi nella cronologia della chat  -->
                     <div id="chat-messages" class="d-flex" :class="defaultClass">
-                        
-                        <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" 
-                        :key="message.id" 
-                        :class="`message ${message.status}`"
-                        class="dropdown btn dropdown-toggle" 
-                        data-bs-toggle="dropdown" aria-expanded="false"> 
-                                <span class="pe-3 text-wrap word-wrap overflow-wrap text-break">{{message.text}}</span>
-                                <span class="timestamp">{{getTime(message.date)}}</span>
-                            
-                            <ul class="dropdown-menu">
+
+                        <div v-if="nowActiveID" v-for="message in nowActiveContact.messages" :key="message.id"
+                            :class="`message ${message.status}`" class="btn" @click="toggleDropdown(message.id)">
+                            <span class="pe-3 text-wrap word-wrap overflow-wrap text-break">{{message.text}}</span>
+                            <span class="timestamp">{{getTime(message.date)}}</span>
+
+                            <ul class="dropdown-menu" :class="{ 'show': activeDropdownId === message.id }">
                                 <li><a class="dropdown-item" href="#">Message info</a></li>
-                                <li><a class="dropdown-item" href="#" @click="deleteMessage(message.id)">Delete message</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#" @click="deleteMessage(message.id)">Delete
+                                        message</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
 
+                    <!-- Input per inserimento nuovi messaggi -->
                     <form id="input-area" class="flex-center" @submit="onSubmit" :class="defaultClass">
                         <i class="fa-regular fa-face-smile align-self-center"></i>
-                        <input type="text" class="rounded ps-3" placeholder="Scrivi un messaggio" @keyup.enter="addMessage" v-model="newMessage">
+                        <input type="text" class="rounded ps-3" placeholder="Scrivi un messaggio"
+                            @keyup.enter="addMessage" v-model="newMessage">
                         <i class="fa-solid fa-microphone align-self-center"></i>
                     </form>
                 </main>
@@ -149,6 +168,9 @@
             </section>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -1,10 +1,8 @@
-console.log("Vue OK", Vue);
 
-
-const {createApp} = Vue;
-const app = createApp ({
+const { createApp } = Vue;
+const app = createApp({
     name: "Boolzapp",
-    data () {
+    data() {
         return {
             ...data,
             nowActiveID: null,
@@ -12,113 +10,128 @@ const app = createApp ({
             newMessage: "",
             active: true,
             textSearch: "",
+            activeDropdownId: null
         }
     },
     computed: {
-        defaultClass (){ 
+        defaultClass() {
             return {
                 "d-none": this.nowActiveContact === false
             }
         },
-        nowActive(){
+        nowActive() {
             return {
                 "d-none": this.nowActiveContact !== false
             }
         },
-        contactsFilter(){
+        contactsFilter() {
             const loweredTextSearch = this.textSearch.toLowerCase()
 
-            return this.contacts.filter(contact => 
+            return this.contacts.filter(contact =>
                 contact.name.toLowerCase().includes(loweredTextSearch)
             );
-        },
+        }
     },
     methods: {
         changeActiveID(id) {
-            for (let i=0; i < this.contacts.length; i++){
+            for (let i = 0; i < this.contacts.length; i++) {
                 if (this.contacts[i].id === id) {
                     this.nowActiveID = id,
-                    this.nowActiveContact = this.contacts[i]
+                        this.nowActiveContact = this.contacts[i]
                 }
             }
         },
-        newDate (){
+        newTime() {
+            // Creo una data da stampare alla creazione di un nuovo messaggio
             const currentDate = new Date();
-            console.log(currentDate)
 
-            return currentDate.toLocaleString();
+            return currentDate;
         },
-        getTime (date){
+        getTime(date) {
+            //stampo in pagina l'orario di invio/ricezione di un messaggio
             const newDate = new Date(date)
             const hours = newDate.getHours()
             const minutes = newDate.getMinutes()
-            console.log(newDate)
             return `${hours}:${minutes}`
         },
-        addMessage (){
-            if (!this.newMessage) return
+        addMessage() {
+            // se il campo del nuovo messaggio è vuoto non lo invio
+            if (!this.newMessage) return;
 
-            const updateMessages = this.nowActiveContact.messages
-            
+            // alternativamente creo il nuovo messaggio
+            const updateMessages = this.nowActiveContact.messages;
             const newMessage = {
-                id: updateMessages.length,
-                date: this.newDate(),
+                id: updateMessages.length + 1,
+                date: this.newTime(),
                 text: this.newMessage,
                 status: 'sent'
-            }
-            updateMessages.push(newMessage)
+            };
+            updateMessages.push(newMessage);
             this.newMessage = "";
-            this.reply()
+            this.reply();
         },
         reply() {
+            // dopo un secondo dall'invio del nuovo messaggio riceverò 
+            // una risposta automatica
             setTimeout(() => {
-                const updateMessages = this.nowActiveContact.messages
-            
+                const updateMessages = this.nowActiveContact.messages;
+
                 const newMessage = {
-                    id: updateMessages.length,
-                    date: this.newDate(),
+                    id: updateMessages.length + 1,
+                    date: this.newTime(),
                     text: "ok",
                     status: 'received'
-                }
-                updateMessages.push(newMessage)
-            },1000)
+                };
+                updateMessages.push(newMessage);
+            }, 1000);
         },
-        onSubmit(e) { 
+        onSubmit(e) {
             e.preventDefault();
         },
-        getAvatarUrl (avatar) {
+        getAvatarUrl(avatar) {
             return `img/avatar${avatar}.jpg`
         },
         lastMessage(messages) {
-            const lastMessageDate = messages[messages.length - 1].date
-            return lastMessageDate
+            // recupero la data dell'ultimo messaggio
+            const lastMessageDate = messages[messages.length - 1].date;
+            const currentDate = new Date(lastMessageDate);
+            return currentDate.toLocaleString();
+
         },
         lastMessageText(messages) {
+            // creo un abstract dell'ultimo messaggio
             const lastMessageText = messages[messages.length - 1].text
             const splitWords = lastMessageText.split("")
             const splittedWords = []
-            for (let i=0; i < splitWords.length; i++) {
-                if (i <= 15){
+            for (let i = 0; i < splitWords.length; i++) {
+                if (i <= 15) {
                     splittedWords.push(splitWords[i])
                 }
             }
             return `${splittedWords.join("")}...`
         },
-        deleteMessage(messageId){
-            console.log(messageId)
+        deleteMessage(messageId) {
+            //cancello un messaggio nella conversazione
             const messages = this.nowActiveContact.messages
-            newArray = messages.filter(message => message.id !== messageId);
-            console.log(newArray)
-        }
+            this.nowActiveContact.messages = messages.filter(message => message.id !== messageId);
+        },
+        toggleDropdown(messageId) {
+            //faccio il toggle del dropdown con id corrispondente
+            if (this.activeDropdownId === messageId) {
+                this.activeDropdownId = null;
+            } else {
+                this.activeDropdownId = messageId;
+            }
+        },
     },
-    mounted(){
+    mounted() {
         let lowestId = Infinity;
         for (contact of this.contacts) {
             if (contact.id < lowestId) {
                 lowestId = contact.id;
             }
         }
-        this.nowActiveID = lowestId 
+        this.nowActiveID = lowestId
     }
 
 })
